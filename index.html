@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Work From Home - Typing Jobs</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #ffd900;
+      color: #222;
+      min-height: 100vh;
+    }
+
+    .header {
+      background: #111;
+      color: #fff;
+      text-align: center;
+      padding: 22px 15px;
+      box-shadow: 0 3px 10px rgba(0,0,0,.25);
+    }
+
+    .header h1 {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      font-size: 16px;
+      color: #ffd900;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 35px 15px;
+    }
+
+    .hero {
+      background: #fff;
+      border-radius: 18px;
+      padding: 28px 20px;
+      text-align: center;
+      margin-bottom: 30px;
+      box-shadow: 0 6px 18px rgba(0,0,0,.18);
+    }
+
+    .hero h2 {
+      font-size: 27px;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .notice {
+      background: #fff3cd;
+      border: 2px solid #111;
+      border-radius: 12px;
+      padding: 15px;
+      margin-top: 18px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .plan {
+      background: #fff;
+      border-radius: 18px;
+      padding: 25px 20px;
+      box-shadow: 0 6px 18px rgba(0,0,0,.2);
+      position: relative;
+      overflow: hidden;
+      transition: .3s;
+    }
+
+    .plan:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 12px 25px rgba(0,0,0,.25);
+    }
+
+    .plan-top {
+      background: #111;
+      color: #fff;
+      padding: 13px;
+      border-radius: 12px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .plan-top h3 {
+      font-size: 21px;
+    }
+
+    .pages {
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .details {
+      list-style: none;
+    }
+
+    .details li {
+      padding: 11px 0;
+      border-bottom: 1px solid #ddd;
+      font-size: 15px;
+    }
+
+    .details li:last-child {
+      border-bottom: none;
+    }
+
+    .icon {
+      margin-right: 7px;
+    }
+
+    .apply-btn {
+      display: block;
+      text-decoration: none;
+      background: #111;
+      color: #fff;
+      text-align: center;
+      padding: 14px;
+      margin-top: 20px;
+      border-radius: 10px;
+      font-size: 17px;
+      font-weight: bold;
+      transition: .3s;
+    }
+
+    .apply-btn:hover {
+      background: #333;
+      transform: scale(1.02);
+    }
+
+    .info-box {
+      background: #fff;
+      border-radius: 18px;
+      margin-top: 30px;
+      padding: 25px;
+      box-shadow: 0 6px 18px rgba(0,0,0,.18);
+    }
+
+    .info-box h2 {
+      margin-bottom: 15px;
+      font-size: 22px;
+    }
+
+    .info-box p {
+      line-height: 1.7;
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+
+    .footer {
+      background: #111;
+      color: #fff;
+      text-align: center;
+      padding: 22px 15px;
+      margin-top: 35px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 850px) {
+      .plans {
+        grid-template-columns: 1fr;
+      }
+
+      .header h1 {
+        font-size: 25px;
+      }
+
+      .hero h2 {
+        font-size: 23px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 20px 12px;
+      }
+
+      .plan {
+        padding: 20px 16px;
+      }
+
+      .header h1 {
+        font-size: 22px;
+      }
+
+      .hero {
+        padding: 22px 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <h1>⬇️ WORK FROM HOME JOB'S ⬇️</h1>
+    <p>💻 TYPING WORK OPPORTUNITY</p>
+  </header>
+
+  <main class="container">
+
+    <!-- HERO -->
+    <section class="hero">
+      <h2>💛 Select Your TYPING Plan 💛</h2>
+
+      <p>
+        Choose a typing project according to your available time
+        and preferred page target.
+      </p>
+
+      <div class="notice">
+        <strong>⚠️ Important:</strong>
+        The salary, registration fee and project terms shown below
+        are advertised project details. Please verify the company,
+        work agreement, payment terms and refund conditions before
+        making any payment.
+      </div>
+    </section>
+
+
+    <!-- PLANS -->
+    <section class="plans">
+
+      <!-- PLAN 1 -->
+      <div class="plan">
+
+        <div class="plan-top">
+          <h3>💘 TYPING PLAN 1</h3>
+        </div>
+
+        <div class="pages">
+          📚 50 Pages Book<br>
+          <small>Front & Back = 100 Pages</small>
+        </div>
+
+        <ul class="details">
+          <li>⏱️ <strong>Timing:</strong> 7 Days</li>
+          <li>💰 <strong>Advertised Salary:</strong> ₹25,000/-</li>
+          <li>📝 <strong>Registration Fee:</strong> ₹500/-</li>
+          <li>🔄 <strong>Refund:</strong> As per written terms</li>
+        </ul>
+
+        <a href="#" class="apply-btn">
+          APPLY NOW →
+        </a>
+
+      </div>
+
+
+      <!-- PLAN 2 -->
+      <div class="plan">
+
+        <div class="plan-top">
+          <h3>😀 TYPING PLAN 2</h3>
+        </div>
+
+        <div class="pages">
+          📚 90 Pages Book<br>
+          <small>Front & Back = 180 Pages</small>
+        </div>
+
+        <ul class="details">
+          <li>⏱️ <strong>Timing:</strong> 10 Days</li>
+          <li>💰 <strong>Advertised Salary:</strong> ₹30,000/-</li>
+          <li>📝 <strong>Registration Fee:</strong> ₹500/-</li>
+          <li>🔄 <strong>Refund:</strong> As per written terms</li>
+        </ul>
+
+        <a href="#" class="apply-btn">
+          APPLY NOW →
+        </a>
+
+      </div>
+
+
+      <!-- PLAN 3 -->
+      <div class="plan">
+
+        <div class="plan-top">
+          <h3>😀 TYPING PLAN 3</h3>
+        </div>
+
+        <div class="pages">
+          📚 120 Pages Book<br>
+          <small>Front & Back = 240 Pages</small>
+        </div>
+
+        <ul class="details">
+          <li>⏱️ <strong>Timing:</strong> 15 Days</li>
+          <li>💰 <strong>Advertised Salary:</strong> ₹35,000/-</li>
+          <li>📝 <strong>Registration Fee:</strong> ₹500/-</li>
+          <li>🔄 <strong>Refund:</strong> As per written terms</li>
+        </ul>
+
+        <a href="#" class="apply-btn">
+          APPLY NOW →
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- INFORMATION -->
+    <section class="info-box">
+
+      <h2>📌 Project Information</h2>
+
+      <p>
+        💌 Any registration fee and refund arrangement should be
+        governed by clear written terms and conditions provided
+        to the applicant before payment.
+      </p>
+
+      <p>
+        💰 Any salary/payment schedule should be confirmed in the
+        official work agreement before starting the project.
+      </p>
+
+      <p>
+        📄 Applicants should carefully review the project instructions,
+        page requirements, deadlines and payment conditions.
+      </p>
+
+      <p>
+        🔐 Never share passwords, OTPs, banking PINs or other
+        confidential information with unknown persons.
+      </p>
+
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    © 2026 Work From Home Typing Jobs
+    <br>
+    All project details are subject to verification and applicable terms.
+  </footer>
+
+
+  <!-- JAVASCRIPT -->
+  <script>
+    document.querySelectorAll(".apply-btn").forEach(function(button) {
+      button.addEventListener("click", function(event) {
+        event.preventDefault();
+
+        alert(
+          "Please verify the project details, company information, " +
+          "payment terms and refund policy before proceeding."
+        );
+      });
+    });
+  </script>
+
+</body>
+</html>
