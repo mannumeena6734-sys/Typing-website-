@@ -33,12 +33,51 @@
       background: #111;
       color: white;
       text-align: center;
-      padding: 22px 15px;
+      padding: 18px 15px 22px;
     }
 
-    .header h1 {
-      font-size: 30px;
-      margin-bottom: 8px;
+    /* =========================
+       TYPING WORK LOGO
+    ========================= */
+
+    .typing-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .logo-icon {
+      width: 58px;
+      height: 58px;
+      background: #ffd900;
+      color: #111;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 31px;
+      box-shadow: 0 4px 12px rgba(255,217,0,.3);
+    }
+
+    .logo-text {
+      text-align: left;
+    }
+
+    .logo-text h1 {
+      font-size: 28px;
+      margin: 0;
+      line-height: 1.1;
+    }
+
+    .logo-text span {
+      display: block;
+      color: #ffd900;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 1.5px;
+      margin-top: 4px;
     }
 
     .header p {
@@ -228,14 +267,76 @@
       line-height: 1.6;
     }
 
+
+    /* =========================
+       GET SUPPORT BUTTON
+    ========================= */
+
+    .telegram-support {
+      position: fixed;
+      right: 18px;
+      bottom: 20px;
+      z-index: 9999;
+
+      display: flex;
+      align-items: center;
+      gap: 9px;
+
+      background: #229ED9;
+      color: white;
+
+      text-decoration: none;
+
+      padding: 13px 19px;
+      border-radius: 50px;
+
+      font-size: 15px;
+      font-weight: bold;
+
+      box-shadow: 0 5px 18px rgba(0,0,0,.30);
+
+      transition: all .2s ease;
+    }
+
+    .telegram-support:hover {
+      transform: translateY(-2px);
+      background: #168ac0;
+    }
+
+    .telegram-icon {
+      font-size: 21px;
+    }
+
+
     @media(max-width:850px) {
 
       .plans {
         grid-template-columns: 1fr;
       }
 
-      .header h1 {
+      .logo-text h1 {
         font-size: 23px;
+      }
+
+    }
+
+
+    @media(max-width:500px) {
+
+      .logo-icon {
+        width: 52px;
+        height: 52px;
+        font-size: 27px;
+      }
+
+      .logo-text h1 {
+        font-size: 21px;
+      }
+
+      .telegram-support {
+        right: 12px;
+        bottom: 15px;
+        padding: 12px 16px;
       }
 
     }
@@ -249,9 +350,36 @@
 
 <header class="header">
 
-  <h1>⬇️ WORK FROM HOME JOB'S ⬇️</h1>
 
-  <p>💻 TYPING WORK OPPORTUNITY</p>
+  <!-- =========================
+       TYPING WORK LOGO
+  ========================= -->
+
+  <div class="typing-logo">
+
+    <div class="logo-icon">
+      ⌨️
+    </div>
+
+    <div class="logo-text">
+
+      <h1>
+        Typing Work
+      </h1>
+
+      <span>
+        WORK FROM HOME
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <p>
+    💻 TYPING WORK OPPORTUNITY
+  </p>
+
 
 </header>
 
@@ -573,6 +701,28 @@
 </main>
 
 
+<!-- =========================
+     GET SUPPORT BUTTON
+========================= -->
+
+<a
+  class="telegram-support"
+  href="https://t.me/Nitin_kumar_typing_job_1/?text=*HELLO_SIR_@*"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+
+  <span class="telegram-icon">
+    ✈️
+  </span>
+
+  <span>
+    GET SUPPORT
+  </span>
+
+</a>
+
+
 <footer class="footer">
 
   © 2026 Work From Home Typing Jobs
@@ -822,7 +972,7 @@
 
       });
 
-  
+
   // =====================================
   // START
   // =====================================
