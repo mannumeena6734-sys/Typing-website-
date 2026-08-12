@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>Work From Home - Typing Jobs</title>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
+
     * {
       margin: 0;
       padding: 0;
@@ -170,7 +177,6 @@
       font-weight: bold;
     }
 
-
     .payment-box {
       margin-top: 20px;
       padding: 20px;
@@ -192,6 +198,8 @@
       margin: 18px auto;
       border-radius: 12px;
       border: 1px solid #ddd;
+      min-height: 150px;
+      object-fit: contain;
     }
 
     .payment-help {
@@ -221,6 +229,7 @@
     }
 
     @media(max-width:850px) {
+
       .plans {
         grid-template-columns: 1fr;
       }
@@ -228,20 +237,30 @@
       .header h1 {
         font-size: 23px;
       }
+
     }
+
   </style>
+
 </head>
 
 <body>
 
+
 <header class="header">
+
   <h1>⬇️ WORK FROM HOME JOB'S ⬇️</h1>
+
   <p>💻 TYPING WORK OPPORTUNITY</p>
+
 </header>
+
 
 <main class="container">
 
+
   <section class="hero">
+
     <h2>💛 Select Your TYPING Plan 💛</h2>
 
     <p>
@@ -250,93 +269,155 @@
     </p>
 
     <div class="notice">
+
       <strong>⚠️ Important:</strong>
+
       Please verify the company, work agreement, payment terms
       and refund conditions before making any payment.
+
     </div>
+
   </section>
 
 
   <section class="plans">
 
+
     <!-- PLAN 1 -->
+
     <div class="plan">
+
       <div class="plan-top">
+
         <h3>💘 TYPING PLAN 1</h3>
+
       </div>
 
       <div class="pages">
+
         📚 50 Pages Book<br>
+
         <small>Front & Back = 100 Pages</small>
+
       </div>
 
       <ul class="details">
+
         <li>⏱️ <b>Timing:</b> 7 Days</li>
+
         <li>💰 <b>Advertised Salary:</b> ₹25,000/-</li>
+
         <li>📝 <b>Registration Fee:</b> ₹500/-</li>
+
       </ul>
 
-      <button class="apply-btn" onclick="openForm('Typing Plan 1')">
+      <button
+        class="apply-btn"
+        onclick="openForm('Typing Plan 1')"
+      >
+
         APPLY NOW →
+
       </button>
+
     </div>
 
 
     <!-- PLAN 2 -->
+
     <div class="plan">
+
       <div class="plan-top">
+
         <h3>😀 TYPING PLAN 2</h3>
+
       </div>
 
       <div class="pages">
+
         📚 90 Pages Book<br>
+
         <small>Front & Back = 180 Pages</small>
+
       </div>
 
       <ul class="details">
+
         <li>⏱️ <b>Timing:</b> 10 Days</li>
+
         <li>💰 <b>Advertised Salary:</b> ₹30,000/-</li>
+
         <li>📝 <b>Registration Fee:</b> ₹500/-</li>
+
       </ul>
 
-      <button class="apply-btn" onclick="openForm('Typing Plan 2')">
+      <button
+        class="apply-btn"
+        onclick="openForm('Typing Plan 2')"
+      >
+
         APPLY NOW →
+
       </button>
+
     </div>
 
 
     <!-- PLAN 3 -->
+
     <div class="plan">
+
       <div class="plan-top">
+
         <h3>😀 TYPING PLAN 3</h3>
+
       </div>
 
       <div class="pages">
+
         📚 120 Pages Book<br>
+
         <small>Front & Back = 240 Pages</small>
+
       </div>
 
       <ul class="details">
+
         <li>⏱️ <b>Timing:</b> 15 Days</li>
+
         <li>💰 <b>Advertised Salary:</b> ₹35,000/-</li>
+
         <li>📝 <b>Registration Fee:</b> ₹500/-</li>
+
       </ul>
 
-      <button class="apply-btn" onclick="openForm('Typing Plan 3')">
+      <button
+        class="apply-btn"
+        onclick="openForm('Typing Plan 3')"
+      >
+
         APPLY NOW →
+
       </button>
+
     </div>
+
 
   </section>
 
 
   <!-- APPLICATION FORM -->
 
-  <section class="form-box" id="applicationForm">
+  <section
+    class="form-box"
+    id="applicationForm"
+  >
 
     <h2>📝 Apply Now</h2>
 
+
     <form id="applyForm">
+
 
       <input
         type="text"
@@ -345,12 +426,14 @@
         required
       >
 
+
       <input
         type="email"
         id="email"
         placeholder="Email Address"
         required
       >
+
 
       <input
         type="tel"
@@ -359,12 +442,27 @@
         required
       >
 
+
       <select id="plan" required>
-        <option value="">Select Plan</option>
-        <option value="Typing Plan 1">Typing Plan 1</option>
-        <option value="Typing Plan 2">Typing Plan 2</option>
-        <option value="Typing Plan 3">Typing Plan 3</option>
+
+        <option value="">
+          Select Plan
+        </option>
+
+        <option value="Typing Plan 1">
+          Typing Plan 1
+        </option>
+
+        <option value="Typing Plan 2">
+          Typing Plan 2
+        </option>
+
+        <option value="Typing Plan 3">
+          Typing Plan 3
+        </option>
+
       </select>
+
 
       <textarea
         id="messageText"
@@ -372,29 +470,47 @@
       ></textarea>
 
 
+      <!-- PAYMENT -->
+
       <div class="payment-box">
+
         <h3>💳 Payment</h3>
 
+
         <p class="payment-help">
+
           Selected plan ki registration fee pay karne ke liye
           neeche diya QR Code scan karein. Payment karne se pehle
           amount, recipient aur written terms ko verify karein.
+
         </p>
 
+
         <img
-          src="payment-qr.jpg"
+          id="paymentQR"
+          src=""
           alt="Payment QR Code"
           class="payment-qr"
         >
 
+
         <p class="payment-help">
+
           Payment complete hone ke baad apna
           <strong>UTR / Transaction ID</strong> enter karein.
+
         </p>
 
-        <label class="utr-label" for="paymentUtr">
+
+        <label
+          class="utr-label"
+          for="paymentUtr"
+        >
+
           UTR / Transaction ID
+
         </label>
+
 
         <input
           type="text"
@@ -404,13 +520,22 @@
           maxlength="100"
           required
         >
+
       </div>
 
-      <button class="submit-btn" type="submit">
+
+      <button
+        class="submit-btn"
+        type="submit"
+      >
+
         SUBMIT APPLICATION
+
       </button>
 
+
       <div id="message"></div>
+
 
     </form>
 
@@ -444,25 +569,35 @@
 
   </section>
 
+
 </main>
 
 
 <footer class="footer">
+
   © 2026 Work From Home Typing Jobs
+
   <br>
+
   All project details are subject to verification and applicable terms.
+
 </footer>
 
 
 <script>
 
-  // ==============================
+
+  // =====================================
   // SUPABASE CONFIG
-  // ==============================
+  // =====================================
 
-  const SUPABASE_URL = "https://ztoebrsyyknoegbisgyj.supabase.co";
+  const SUPABASE_URL =
+    "https://ztoebrsyyknoegbisgyj.supabase.co";
 
-  const SUPABASE_KEY = "sb_publishable_tZ6BzwBYeZcuohucrOvgQA_oSpp6P6h";
+
+  const SUPABASE_KEY =
+    "sb_publishable_tZ6BzwBYeZcuohucrOvgQA_oSpp6P6h";
+
 
   const supabaseClient =
     window.supabase.createClient(
@@ -471,108 +606,233 @@
     );
 
 
-  // ==============================
+  // =====================================
+  // LOAD PAYMENT QR
+  // =====================================
+
+  async function loadPaymentQR() {
+
+    const qr =
+      document.getElementById("paymentQR");
+
+    try {
+
+      const {
+        data,
+        error
+      } =
+        await supabaseClient
+          .from("site_settings")
+          .select("payment_qr_url")
+          .eq("id", 1)
+          .maybeSingle();
+
+
+      if (error) {
+
+        console.error(
+          "QR loading error:",
+          error
+        );
+
+        return;
+      }
+
+
+      if (
+        data &&
+        data.payment_qr_url
+      ) {
+
+        qr.src =
+          data.payment_qr_url;
+
+      } else {
+
+        qr.alt =
+          "Payment QR not configured";
+
+      }
+
+    } catch (err) {
+
+      console.error(
+        "QR error:",
+        err
+      );
+
+    }
+
+  }
+
+
+  // =====================================
   // OPEN APPLICATION FORM
-  // ==============================
+  // =====================================
 
   function openForm(planName) {
 
-    document.getElementById("applicationForm").style.display = "block";
+    document
+      .getElementById("applicationForm")
+      .style.display = "block";
 
-    document.getElementById("plan").value = planName;
+
+    document
+      .getElementById("plan")
+      .value = planName;
+
 
     document
       .getElementById("applicationForm")
       .scrollIntoView({
         behavior: "smooth"
       });
+
   }
 
 
-  // ==============================
+  // =====================================
   // SUBMIT APPLICATION
-  // ==============================
+  // =====================================
 
   document
     .getElementById("applyForm")
-    .addEventListener("submit", async function(e) {
+    .addEventListener(
+      "submit",
+      async function(e) {
 
-      e.preventDefault();
-
-      const message =
-        document.getElementById("message");
-
-      message.innerText = "Submitting...";
-
-      const name =
-        document.getElementById("name").value.trim();
-
-      const email =
-        document.getElementById("email").value.trim();
-
-      const phone =
-        document.getElementById("phone").value.trim();
-
-      const plan =
-        document.getElementById("plan").value;
-
-      const messageText =
-        document.getElementById("messageText").value.trim();
-
-      const paymentUtr =
-        document.getElementById("paymentUtr").value.trim();
-
-      if (!paymentUtr) {
-        message.style.color = "red";
-        message.innerText =
-          "❌ Please enter your UTR / Transaction ID.";
-        return;
-      }
+        e.preventDefault();
 
 
-      const { data, error } =
-        await supabaseClient
-          .from("applications")
-          .insert([
-            {
-              name: name,
-              email: email,
-              phone: phone,
-              plan: plan,
-              message: messageText,
-              payment_utr: paymentUtr
-            }
-          ])
-          .select();
+        const message =
+          document.getElementById("message");
 
 
-      if (error) {
+        message.style.color =
+          "#222";
 
-        console.error(error);
-
-        message.style.color = "red";
 
         message.innerText =
-          "❌ Application submit nahi hui: " +
-          error.message;
-
-        return;
-      }
+          "Submitting...";
 
 
-      message.style.color = "green";
+        const name =
+          document
+            .getElementById("name")
+            .value
+            .trim();
 
-      message.innerText =
-        "✅ Application successfully submitted!";
+
+        const email =
+          document
+            .getElementById("email")
+            .value
+            .trim();
 
 
-      document
-        .getElementById("applyForm")
-        .reset();
+        const phone =
+          document
+            .getElementById("phone")
+            .value
+            .trim();
 
-    });
+
+        const plan =
+          document
+            .getElementById("plan")
+            .value;
+
+
+        const messageText =
+          document
+            .getElementById("messageText")
+            .value
+            .trim();
+
+
+        const paymentUtr =
+          document
+            .getElementById("paymentUtr")
+            .value
+            .trim();
+
+
+        if (!paymentUtr) {
+
+          message.style.color =
+            "red";
+
+          message.innerText =
+            "❌ Please enter your UTR / Transaction ID.";
+
+          return;
+
+        }
+
+
+        const {
+          data,
+          error
+        } =
+          await supabaseClient
+            .from("applications")
+            .insert([
+              {
+                name: name,
+                email: email,
+                phone: phone,
+                plan: plan,
+                message: messageText,
+                payment_utr: paymentUtr
+              }
+            ])
+            .select();
+
+
+        if (error) {
+
+          console.error(error);
+
+
+          message.style.color =
+            "red";
+
+
+          message.innerText =
+            "❌ Application submit nahi hui: " +
+            error.message;
+
+
+          return;
+
+        }
+
+
+        message.style.color =
+          "green";
+
+
+        message.innerText =
+          "✅ Application successfully submitted!";
+
+
+        document
+          .getElementById("applyForm")
+          .reset();
+
+      });
+
+  
+  // =====================================
+  // START
+  // =====================================
+
+  loadPaymentQR();
+
 
 </script>
 
+
 </body>
+
 </html>
