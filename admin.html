@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Admin Panel</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: #f2f2f2;
+      color: #222;
+    }
+
+    header {
+      background: #111;
+      color: white;
+      padding: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    .logout {
+      background: #ffd900;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 7px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .stat {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 3px 12px rgba(0,0,0,.1);
+    }
+
+    .stat h2 {
+      margin: 0;
+      font-size: 30px;
+    }
+
+    .table-box {
+      background: white;
+      padding: 15px;
+      border-radius: 12px;
+      overflow-x: auto;
+      box-shadow: 0 3px 12px rgba(0,0,0,.1);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 850px;
+    }
+
+    th,
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background: #111;
+      color: white;
+    }
+
+    .delete-btn {
+      background: #d60000;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .refresh-btn {
+      background: #111;
+      color: white;
+      border: none;
+      padding: 11px 18px;
+      border-radius: 7px;
+      cursor: pointer;
+      margin-bottom: 15px;
+    }
+
+    #status {
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+
+    @media(max-width:700px) {
+
+      header {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      header h1 {
+        text-align: center;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+
+<header>
+
+  <h1>🔐 Admin Panel</h1>
+
+  <button
+    class="logout"
+    onclick="logout()"
+  >
+    LOGOUT
+  </button>
+
+</header>
+
+
+<div class="container">
+
+
+  <div class="stats">
+
+    <div class="stat">
+
+      <p>Total Applications</p>
+
+      <h2 id="totalApplications">
+        0
+      </h2>
+
+    </div>
+
+
+    <div class="stat">
+
+      <p>Plan 1</p>
+
+      <h2 id="plan1">
+        0
+      </h2>
+
+    </div>
+
+
+    <div class="stat">
+
+      <p>Plan 2/3</p>
+
+      <h2 id="plan23">
+        0
+      </h2>
+
+    </div>
+
+  </div>
+
+
+  <button
+    class="refresh-btn"
+    onclick="loadApplications()"
+  >
+    🔄 Refresh Applications
+  </button>
+
+
+  <div id="status"></div>
+
+
+  <div class="table-box">
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>Name</th>
+
+          <th>Email</th>
+
+          <th>Phone</th>
+
+          <th>Plan</th>
+
+          <th>Message</th>
+
+          <th>Date</th>
+
+          <th>Action</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody id="applicationsTable">
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+</div>
+
+
+<script>
+
+  // ==========================
+  // SUPABASE
+  // ==========================
+
+  const SUPABASE_URL =
+    "PASTE_YOUR_SUPABASE_URL_HERE";
+
+  const SUPABASE_KEY =
+    "PASTE_YOUR_PUBLISHABLE_KEY_HERE";
+
+
+  const supabaseClient =
+    window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+
+  // ==========================
+  // ADMIN EMAIL
+  // ==========================
+
+  const ADMIN_EMAIL =
+    "YOUR_ADMIN_EMAIL@gmail.com";
+
+
+  // ==========================
+  // CHECK LOGIN
+  // ==========================
+
+  async function checkAdmin() {
+
+    const {
+      data: {
+        user
+      }
+    } =
+      await supabaseClient.auth.getUser();
+
+
+    if (!user) {
+
+      window.location.href =
+        "admin-login.html";
+
+      return false;
+    }
+
+
+    if (
+      user.email.toLowerCase() !==
+      ADMIN_EMAIL.toLowerCase()
+    ) {
+
+      await supabaseClient.auth.signOut();
+
+      window.location.href =
+        "admin-login.html";
+
+      return false;
+    }
+
+
+    return true;
+  }
+
+
+  // ==========================
+  // LOAD APPLICATIONS
+  // ==========================
+
+  async function loadApplications() {
+
+    const allowed =
+      await checkAdmin();
+
+    if (!allowed) return;
+
+
+    const status =
+      document.getElementById("status");
+
+    status.innerText =
+      "Loading applications...";
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("applications")
+        .select("*")
+        .order(
+          "created_at",
+          {
+            ascending: false
+          }
+        );
+
+
+    if (error) {
+
+      console.error(error);
+
+      status.style.color = "red";
+
+      status.innerText =
+        "❌ Error: " +
+        error.message;
+
+      return;
+    }
+
+
+    status.style.color = "green";
+
+    status.innerText =
+      "✅ Applications loaded";
+
+
+    displayApplications(data);
+
+  }
+
+
+  // ==========================
+  // DISPLAY
+  // ==========================
+
+  function displayApplications(applications) {
+
+    const table =
+      document.getElementById(
+        "applicationsTable"
+      );
+
+
+    table.innerHTML = "";
+
+
+    document.getElementById(
+      "totalApplications"
+    ).innerText =
+      applications.length;
+
+
+    let plan1 = 0;
+
+    let plan23 = 0;
+
+
+    applications.forEach(function(app) {
+
+      if (
+        app.plan === "Typing Plan 1"
+      ) {
+        plan1++;
+      } else {
+        plan23++;
+      }
+
+
+      const row =
+        document.createElement("tr");
+
+
+      row.innerHTML = `
+
+        <td>${escapeHTML(app.name || "")}</td>
+
+        <td>${escapeHTML(app.email || "")}</td>
+
+        <td>${escapeHTML(app.phone || "")}</td>
+
+        <td>${escapeHTML(app.plan || "")}</td>
+
+        <td>${escapeHTML(app.message || "")}</td>
+
+        <td>
+          ${
+            app.created_at
+            ? new Date(app.created_at)
+                .toLocaleString()
+            : ""
+          }
+        </td>
+
+        <td>
+          <button
+            class="delete-btn"
+            onclick="deleteApplication('${app.id}')"
+          >
+            Delete
+          </button>
+        </td>
+
+      `;
+
+
+      table.appendChild(row);
+
+    });
+
+
+    document.getElementById(
+      "plan1"
+    ).innerText = plan1;
+
+
+    document.getElementById(
+      "plan23"
+    ).innerText = plan23;
+
+  }
+
+
+  // ==========================
+  // DELETE
+  // ==========================
+
+  async function deleteApplication(id) {
+
+    if (
+      !confirm(
+        "Kya aap is application ko delete karna chahte hain?"
+      )
+    ) {
+      return;
+    }
+
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .from("applications")
+        .delete()
+        .eq("id", id);
+
+
+    if (error) {
+
+      alert(
+        "Delete error: " +
+        error.message
+      );
+
+      return;
+    }
+
+
+    alert(
+      "Application deleted."
+    );
+
+
+    loadApplications();
+
+  }
+
+
+  // ==========================
+  // LOGOUT
+  // ==========================
+
+  async function logout() {
+
+    await supabaseClient.auth.signOut();
+
+    window.location.href =
+      "admin-login.html";
+
+  }
+
+
+  // ==========================
+  // HTML SECURITY
+  // ==========================
+
+  function escapeHTML(value) {
+
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+  }
+
+
+  // ==========================
+  // START
+  // ==========================
+
+  checkAdmin()
+    .then(function(allowed) {
+
+      if (allowed) {
+        loadApplications();
+      }
+
+    });
+
+</script>
+
+</body>
+</html>
