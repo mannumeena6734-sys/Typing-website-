@@ -6,6 +6,8 @@
 
   <title>Work From Home - Typing Jobs</title>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <style>
     * {
       margin: 0;
@@ -22,10 +24,9 @@
 
     .header {
       background: #111;
-      color: #fff;
+      color: white;
       text-align: center;
       padding: 22px 15px;
-      box-shadow: 0 3px 10px rgba(0,0,0,.25);
     }
 
     .header h1 {
@@ -34,7 +35,6 @@
     }
 
     .header p {
-      font-size: 16px;
       color: #ffd900;
       font-weight: bold;
     }
@@ -42,35 +42,38 @@
     .container {
       max-width: 1100px;
       margin: auto;
-      padding: 35px 15px;
+      padding: 30px 15px;
     }
 
-    .hero {
-      background: #fff;
+    .hero,
+    .plan,
+    .info-box,
+    .form-box {
+      background: white;
       border-radius: 18px;
-      padding: 28px 20px;
-      text-align: center;
-      margin-bottom: 30px;
+      padding: 25px;
+      margin-bottom: 25px;
       box-shadow: 0 6px 18px rgba(0,0,0,.18);
     }
 
+    .hero {
+      text-align: center;
+    }
+
     .hero h2 {
-      font-size: 27px;
       margin-bottom: 12px;
     }
 
     .hero p {
-      font-size: 16px;
       line-height: 1.6;
     }
 
     .notice {
+      margin-top: 18px;
+      padding: 15px;
       background: #fff3cd;
       border: 2px solid #111;
       border-radius: 12px;
-      padding: 15px;
-      margin-top: 18px;
-      font-size: 14px;
       line-height: 1.6;
     }
 
@@ -81,31 +84,16 @@
     }
 
     .plan {
-      background: #fff;
-      border-radius: 18px;
-      padding: 25px 20px;
-      box-shadow: 0 6px 18px rgba(0,0,0,.2);
-      position: relative;
-      overflow: hidden;
-      transition: .3s;
-    }
-
-    .plan:hover {
-      transform: translateY(-7px);
-      box-shadow: 0 12px 25px rgba(0,0,0,.25);
+      margin-bottom: 0;
     }
 
     .plan-top {
       background: #111;
-      color: #fff;
+      color: white;
       padding: 13px;
       border-radius: 12px;
       text-align: center;
       margin-bottom: 20px;
-    }
-
-    .plan-top h3 {
-      font-size: 21px;
     }
 
     .pages {
@@ -120,96 +108,88 @@
     }
 
     .details li {
-      padding: 11px 0;
+      padding: 10px 0;
       border-bottom: 1px solid #ddd;
-      font-size: 15px;
-    }
-
-    .details li:last-child {
-      border-bottom: none;
-    }
-
-    .icon {
-      margin-right: 7px;
     }
 
     .apply-btn {
-      display: block;
-      text-decoration: none;
+      width: 100%;
+      border: none;
       background: #111;
-      color: #fff;
-      text-align: center;
+      color: white;
       padding: 14px;
       margin-top: 20px;
       border-radius: 10px;
-      font-size: 17px;
+      font-size: 16px;
       font-weight: bold;
-      transition: .3s;
+      cursor: pointer;
     }
 
     .apply-btn:hover {
       background: #333;
-      transform: scale(1.02);
     }
 
-    .info-box {
-      background: #fff;
-      border-radius: 18px;
-      margin-top: 30px;
-      padding: 25px;
-      box-shadow: 0 6px 18px rgba(0,0,0,.18);
+    .form-box {
+      display: none;
     }
 
-    .info-box h2 {
+    .form-box h2 {
       margin-bottom: 15px;
-      font-size: 22px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 13px;
+      margin-bottom: 12px;
+      border: 1px solid #bbb;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .submit-btn {
+      width: 100%;
+      border: none;
+      background: #111;
+      color: white;
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    #message {
+      margin-top: 12px;
+      font-weight: bold;
     }
 
     .info-box p {
       line-height: 1.7;
-      font-size: 15px;
       margin-bottom: 10px;
     }
 
     .footer {
       background: #111;
-      color: #fff;
+      color: white;
       text-align: center;
-      padding: 22px 15px;
-      margin-top: 35px;
-      font-size: 14px;
+      padding: 22px;
       line-height: 1.6;
     }
 
-    @media (max-width: 850px) {
+    @media(max-width:850px) {
       .plans {
         grid-template-columns: 1fr;
       }
 
       .header h1 {
-        font-size: 25px;
-      }
-
-      .hero h2 {
         font-size: 23px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .container {
-        padding: 20px 12px;
-      }
-
-      .plan {
-        padding: 20px 16px;
-      }
-
-      .header h1 {
-        font-size: 22px;
-      }
-
-      .hero {
-        padding: 22px 15px;
       }
     }
   </style>
@@ -217,168 +197,299 @@
 
 <body>
 
-  <!-- HEADER -->
-  <header class="header">
-    <h1>⬇️ WORK FROM HOME JOB'S ⬇️</h1>
-    <p>💻 TYPING WORK OPPORTUNITY</p>
-  </header>
+<header class="header">
+  <h1>⬇️ WORK FROM HOME JOB'S ⬇️</h1>
+  <p>💻 TYPING WORK OPPORTUNITY</p>
+</header>
 
-  <main class="container">
+<main class="container">
 
-    <!-- HERO -->
-    <section class="hero">
-      <h2>💛 Select Your TYPING Plan 💛</h2>
+  <section class="hero">
+    <h2>💛 Select Your TYPING Plan 💛</h2>
 
-      <p>
-        Choose a typing project according to your available time
-        and preferred page target.
-      </p>
+    <p>
+      Choose a typing project according to your available time
+      and preferred page target.
+    </p>
 
-      <div class="notice">
-        <strong>⚠️ Important:</strong>
-        The salary, registration fee and project terms shown below
-        are advertised project details. Please verify the company,
-        work agreement, payment terms and refund conditions before
-        making any payment.
-      </div>
-    </section>
+    <div class="notice">
+      <strong>⚠️ Important:</strong>
+      Please verify the company, work agreement, payment terms
+      and refund conditions before making any payment.
+    </div>
+  </section>
 
 
-    <!-- PLANS -->
-    <section class="plans">
+  <section class="plans">
 
-      <!-- PLAN 1 -->
-      <div class="plan">
-
-        <div class="plan-top">
-          <h3>💘 TYPING PLAN 1</h3>
-        </div>
-
-        <div class="pages">
-          📚 50 Pages Book<br>
-          <small>Front & Back = 100 Pages</small>
-        </div>
-
-        <ul class="details">
-          <li>⏱️ <strong>Timing:</strong> 7 Days</li>
-          <li>💰 <strong>Advertised Salary:</strong> ₹25,000/-</li>
-          <li>📝 <strong>Registration Fee:</strong> ₹500/-</li>
-          <li>🔄 <strong>Refund:</strong> As per written terms</li>
-        </ul>
-
-        <a href="#" class="apply-btn">
-          APPLY NOW →
-        </a>
-
+    <!-- PLAN 1 -->
+    <div class="plan">
+      <div class="plan-top">
+        <h3>💘 TYPING PLAN 1</h3>
       </div>
 
-
-      <!-- PLAN 2 -->
-      <div class="plan">
-
-        <div class="plan-top">
-          <h3>😀 TYPING PLAN 2</h3>
-        </div>
-
-        <div class="pages">
-          📚 90 Pages Book<br>
-          <small>Front & Back = 180 Pages</small>
-        </div>
-
-        <ul class="details">
-          <li>⏱️ <strong>Timing:</strong> 10 Days</li>
-          <li>💰 <strong>Advertised Salary:</strong> ₹30,000/-</li>
-          <li>📝 <strong>Registration Fee:</strong> ₹500/-</li>
-          <li>🔄 <strong>Refund:</strong> As per written terms</li>
-        </ul>
-
-        <a href="#" class="apply-btn">
-          APPLY NOW →
-        </a>
-
+      <div class="pages">
+        📚 50 Pages Book<br>
+        <small>Front & Back = 100 Pages</small>
       </div>
 
+      <ul class="details">
+        <li>⏱️ <b>Timing:</b> 7 Days</li>
+        <li>💰 <b>Advertised Salary:</b> ₹25,000/-</li>
+        <li>📝 <b>Registration Fee:</b> ₹500/-</li>
+      </ul>
 
-      <!-- PLAN 3 -->
-      <div class="plan">
+      <button class="apply-btn" onclick="openForm('Typing Plan 1')">
+        APPLY NOW →
+      </button>
+    </div>
 
-        <div class="plan-top">
-          <h3>😀 TYPING PLAN 3</h3>
-        </div>
 
-        <div class="pages">
-          📚 120 Pages Book<br>
-          <small>Front & Back = 240 Pages</small>
-        </div>
-
-        <ul class="details">
-          <li>⏱️ <strong>Timing:</strong> 15 Days</li>
-          <li>💰 <strong>Advertised Salary:</strong> ₹35,000/-</li>
-          <li>📝 <strong>Registration Fee:</strong> ₹500/-</li>
-          <li>🔄 <strong>Refund:</strong> As per written terms</li>
-        </ul>
-
-        <a href="#" class="apply-btn">
-          APPLY NOW →
-        </a>
-
+    <!-- PLAN 2 -->
+    <div class="plan">
+      <div class="plan-top">
+        <h3>😀 TYPING PLAN 2</h3>
       </div>
 
-    </section>
+      <div class="pages">
+        📚 90 Pages Book<br>
+        <small>Front & Back = 180 Pages</small>
+      </div>
+
+      <ul class="details">
+        <li>⏱️ <b>Timing:</b> 10 Days</li>
+        <li>💰 <b>Advertised Salary:</b> ₹30,000/-</li>
+        <li>📝 <b>Registration Fee:</b> ₹500/-</li>
+      </ul>
+
+      <button class="apply-btn" onclick="openForm('Typing Plan 2')">
+        APPLY NOW →
+      </button>
+    </div>
 
 
-    <!-- INFORMATION -->
-    <section class="info-box">
+    <!-- PLAN 3 -->
+    <div class="plan">
+      <div class="plan-top">
+        <h3>😀 TYPING PLAN 3</h3>
+      </div>
 
-      <h2>📌 Project Information</h2>
+      <div class="pages">
+        📚 120 Pages Book<br>
+        <small>Front & Back = 240 Pages</small>
+      </div>
 
-      <p>
-        💌 Any registration fee and refund arrangement should be
-        governed by clear written terms and conditions provided
-        to the applicant before payment.
-      </p>
+      <ul class="details">
+        <li>⏱️ <b>Timing:</b> 15 Days</li>
+        <li>💰 <b>Advertised Salary:</b> ₹35,000/-</li>
+        <li>📝 <b>Registration Fee:</b> ₹500/-</li>
+      </ul>
 
-      <p>
-        💰 Any salary/payment schedule should be confirmed in the
-        official work agreement before starting the project.
-      </p>
+      <button class="apply-btn" onclick="openForm('Typing Plan 3')">
+        APPLY NOW →
+      </button>
+    </div>
 
-      <p>
-        📄 Applicants should carefully review the project instructions,
-        page requirements, deadlines and payment conditions.
-      </p>
-
-      <p>
-        🔐 Never share passwords, OTPs, banking PINs or other
-        confidential information with unknown persons.
-      </p>
-
-    </section>
-
-  </main>
+  </section>
 
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    © 2026 Work From Home Typing Jobs
-    <br>
-    All project details are subject to verification and applicable terms.
-  </footer>
+  <!-- APPLICATION FORM -->
+
+  <section class="form-box" id="applicationForm">
+
+    <h2>📝 Apply Now</h2>
+
+    <form id="applyForm">
+
+      <input
+        type="text"
+        id="name"
+        placeholder="Full Name"
+        required
+      >
+
+      <input
+        type="email"
+        id="email"
+        placeholder="Email Address"
+        required
+      >
+
+      <input
+        type="tel"
+        id="phone"
+        placeholder="Mobile Number"
+        required
+      >
+
+      <select id="plan" required>
+        <option value="">Select Plan</option>
+        <option value="Typing Plan 1">Typing Plan 1</option>
+        <option value="Typing Plan 2">Typing Plan 2</option>
+        <option value="Typing Plan 3">Typing Plan 3</option>
+      </select>
+
+      <textarea
+        id="messageText"
+        placeholder="Message (optional)"
+      ></textarea>
+
+      <button class="submit-btn" type="submit">
+        SUBMIT APPLICATION
+      </button>
+
+      <div id="message"></div>
+
+    </form>
+
+  </section>
 
 
-  <!-- JAVASCRIPT -->
-  <script>
-    document.querySelectorAll(".apply-btn").forEach(function(button) {
-      button.addEventListener("click", function(event) {
-        event.preventDefault();
+  <section class="info-box">
 
-        alert(
-          "Please verify the project details, company information, " +
-          "payment terms and refund policy before proceeding."
-        );
+    <h2>📌 Project Information</h2>
+
+    <p>
+      💌 Any registration fee and refund arrangement should be
+      governed by clear written terms and conditions provided
+      to the applicant before payment.
+    </p>
+
+    <p>
+      💰 Any salary/payment schedule should be confirmed in the
+      official work agreement before starting the project.
+    </p>
+
+    <p>
+      📄 Applicants should carefully review project instructions,
+      deadlines and payment conditions.
+    </p>
+
+    <p>
+      🔐 Never share passwords, OTPs, banking PINs or other
+      confidential information with unknown persons.
+    </p>
+
+  </section>
+
+</main>
+
+
+<footer class="footer">
+  © 2026 Work From Home Typing Jobs
+  <br>
+  All project details are subject to verification and applicable terms.
+</footer>
+
+
+<script>
+
+  // ==============================
+  // SUPABASE CONFIG
+  // ==============================
+
+  const SUPABASE_URL = "PASTE_YOUR_SUPABASE_URL_HERE";
+
+  const SUPABASE_KEY = "PASTE_YOUR_PUBLISHABLE_KEY_HERE";
+
+  const supabaseClient =
+    window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+
+  // ==============================
+  // OPEN APPLICATION FORM
+  // ==============================
+
+  function openForm(planName) {
+
+    document.getElementById("applicationForm").style.display = "block";
+
+    document.getElementById("plan").value = planName;
+
+    document
+      .getElementById("applicationForm")
+      .scrollIntoView({
+        behavior: "smooth"
       });
+  }
+
+
+  // ==============================
+  // SUBMIT APPLICATION
+  // ==============================
+
+  document
+    .getElementById("applyForm")
+    .addEventListener("submit", async function(e) {
+
+      e.preventDefault();
+
+      const message =
+        document.getElementById("message");
+
+      message.innerText = "Submitting...";
+
+      const name =
+        document.getElementById("name").value.trim();
+
+      const email =
+        document.getElementById("email").value.trim();
+
+      const phone =
+        document.getElementById("phone").value.trim();
+
+      const plan =
+        document.getElementById("plan").value;
+
+      const messageText =
+        document.getElementById("messageText").value.trim();
+
+
+      const { data, error } =
+        await supabaseClient
+          .from("applications")
+          .insert([
+            {
+              name: name,
+              email: email,
+              phone: phone,
+              plan: plan,
+              message: messageText
+            }
+          ])
+          .select();
+
+
+      if (error) {
+
+        console.error(error);
+
+        message.style.color = "red";
+
+        message.innerText =
+          "❌ Application submit nahi hui: " +
+          error.message;
+
+        return;
+      }
+
+
+      message.style.color = "green";
+
+      message.innerText =
+        "✅ Application successfully submitted!";
+
+
+      document
+        .getElementById("applyForm")
+        .reset();
+
     });
-  </script>
+
+</script>
 
 </body>
 </html>
