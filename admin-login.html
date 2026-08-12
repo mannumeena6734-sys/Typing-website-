@@ -29,12 +29,13 @@
       background: white;
       padding: 30px;
       border-radius: 18px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
     }
 
     h1 {
       text-align: center;
       margin: 0 0 25px;
+      font-size: 34px;
     }
 
     input {
@@ -44,6 +45,11 @@
       border: 1px solid #aaa;
       border-radius: 8px;
       font-size: 16px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #111;
     }
 
     button {
@@ -60,12 +66,14 @@
 
     button:disabled {
       opacity: 0.6;
+      cursor: not-allowed;
     }
 
     #loginMessage {
       margin-top: 15px;
       text-align: center;
       font-weight: bold;
+      min-height: 22px;
     }
   </style>
 </head>
@@ -73,13 +81,16 @@
 <body>
 
   <div class="login-box">
+
     <h1>🔐 Admin Login</h1>
 
     <form id="loginForm">
+
       <input
         type="email"
         id="email"
         placeholder="Admin Email"
+        autocomplete="email"
         required
       >
 
@@ -87,6 +98,7 @@
         type="password"
         id="password"
         placeholder="Password"
+        autocomplete="current-password"
         required
       >
 
@@ -95,71 +107,136 @@
       </button>
 
       <div id="loginMessage"></div>
+
     </form>
+
   </div>
 
   <script>
+    // ==============================
+    // SUPABASE CONFIGURATION
+    // ==============================
+
     const SUPABASE_URL =
       "https://ztoebrsyyknoegbisgyj.supabase.co";
 
-    const SUPABASE_ANON_KEY =
-      "PASTE_YOUR_SB_PUBLISHABLE_KEY_HERE";
+    const SUPABASE_PUBLISHABLE_KEY =
+      "sb_publishable_tZ6BzwBYeZcuohucrOvgQA_oSpp6P6h";
+
+
+    // ==============================
+    // CREATE SUPABASE CLIENT
+    // ==============================
 
     const supabaseClient =
       window.supabase.createClient(
         SUPABASE_URL,
-        SUPABASE_ANON_KEY
+        SUPABASE_PUBLISHABLE_KEY
       );
 
-    const loginForm = document.getElementById("loginForm");
-    const loginButton = document.getElementById("loginButton");
-    const loginMessage = document.getElementById("loginMessage");
 
-    loginForm.addEventListener("submit", async function(event) {
-      event.preventDefault();
+    // ==============================
+    // GET HTML ELEMENTS
+    // ==============================
 
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value;
+    const loginForm =
+      document.getElementById("loginForm");
 
-      loginButton.disabled = true;
-      loginButton.textContent = "LOGIN...";
+    const loginButton =
+      document.getElementById("loginButton");
 
-      loginMessage.style.color = "black";
-      loginMessage.textContent = "Checking login...";
+    const loginMessage =
+      document.getElementById("loginMessage");
 
-      try {
-        const { data, error } =
-          await supabaseClient.auth.signInWithPassword({
-            email: email,
-            password: password
-          });
 
-        if (error) {
-          throw error;
+    // ==============================
+    // LOGIN
+    // ==============================
+
+    loginForm.addEventListener(
+      "submit",
+      async function (event) {
+
+        event.preventDefault();
+
+        const email =
+          document.getElementById("email")
+          .value
+          .trim();
+
+        const password =
+          document.getElementById("password")
+          .value;
+
+
+        // Disable button
+        loginButton.disabled = true;
+        loginButton.textContent = "LOGIN...";
+
+        loginMessage.style.color = "black";
+        loginMessage.textContent = "Checking login...";
+
+
+        try {
+
+          const { data, error } =
+            await supabaseClient.auth.signInWithPassword({
+              email: email,
+              password: password
+            });
+
+
+          // Supabase returned an error
+          if (error) {
+            throw error;
+          }
+
+
+          // User was not returned
+          if (!data || !data.user) {
+            throw new Error("Login failed.");
+          }
+
+
+          // Login successful
+          loginMessage.style.color = "green";
+          loginMessage.textContent =
+            "✅ Login successful!";
+
+
+          // Open admin panel
+          setTimeout(function () {
+
+            window.location.href = "admin.html";
+
+          }, 700);
+
+
+        } catch (error) {
+
+          console.error(
+            "Supabase Login Error:",
+            error
+          );
+
+
+          loginMessage.style.color = "red";
+
+          loginMessage.textContent =
+            "❌ " +
+            (
+              error.message ||
+              "Login failed."
+            );
+
+
+          loginButton.disabled = false;
+          loginButton.textContent = "LOGIN";
         }
 
-        if (!data || !data.user) {
-          throw new Error("Login failed.");
-        }
-
-        loginMessage.style.color = "green";
-        loginMessage.textContent = "✅ Login successful!";
-
-        setTimeout(function() {
-          window.location.href = "admin.html";
-        }, 700);
-
-      } catch (error) {
-        console.error(error);
-
-        loginMessage.style.color = "red";
-        loginMessage.textContent =
-          "❌ " + (error.message || "Login failed.");
-
-        loginButton.disabled = false;
-        loginButton.textContent = "LOGIN";
       }
-    });
+    );
+
   </script>
 
 </body>
