@@ -1,0 +1,79 @@
+From: <Saved by Blink>
+Snapshot-Content-Location: https://mannumeena6734-sys.github.io/Typing-website-/admin-login.html?
+Subject: Admin Login
+Date: Wed, 12 Aug 2026 12:07:39 +0530
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----MultipartBoundary--7xM4wFHHGxMnJP0h6hCOohZVjyDlD8efhFawFx0NoQ----"
+
+
+------MultipartBoundary--7xM4wFHHGxMnJP0h6hCOohZVjyDlD8efhFawFx0NoQ----
+Content-Type: text/html
+Content-ID: <frame-5E2D75DAD93ED53BE01315D26C33B078@mhtml.blink>
+Content-Transfer-Encoding: binary
+Content-Location: https://mannumeena6734-sys.github.io/Typing-website-/admin-login.html?
+
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" type="text/css" href="cid:css-ab840095-fcf0-4304-8600-c1178c7b16d9@mhtml.blink" />
+
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Admin Login</title>
+
+  
+
+  
+
+</head>
+
+<body>
+
+<div class="login-box">
+
+  <h1>🔐 Admin Login</h1>
+
+  <form id="loginForm">
+
+    <input type="email" id="email" placeholder="Admin Email" required="">
+
+    <input type="password" id="password" placeholder="Password" required="">
+
+    <button type="submit">
+      LOGIN
+    </button>
+
+  </form>
+
+  <div id="loginMessage"></div>
+
+</div>
+
+
+
+
+
+
+</body></html>
+------MultipartBoundary--7xM4wFHHGxMnJP0h6hCOohZVjyDlD8efhFawFx0NoQ----
+Content-Type: text/css
+Content-Transfer-Encoding: binary
+Content-Location: cid:css-ab840095-fcf0-4304-8600-c1178c7b16d9@mhtml.blink
+
+@charset "utf-8";
+
+* { box-sizing: border-box; font-family: Arial, sans-serif; }
+
+body { margin: 0px; min-height: 100vh; background: rgb(255, 217, 0); display: flex; align-items: center; justify-content: center; padding: 20px; }
+
+.login-box { width: 100%; max-width: 420px; background: white; padding: 30px; border-radius: 18px; box-shadow: rgba(0, 0, 0, 0.25) 0px 8px 30px; }
+
+h1 { text-align: center; margin-bottom: 25px; }
+
+input { width: 100%; padding: 14px; margin-bottom: 15px; border: 1px solid rgb(170, 170, 170); border-radius: 8px; font-size: 16px; }
+
+button { width: 100%; padding: 14px; border: 0px; border-radius: 8px; background: rgb(17, 17, 17); color: white; font-size: 16px; font-weight: bold; cursor: pointer; }
+
+#loginMessage { margin-top: 15px; text-align: center; font-weight: bold; }
+------MultipartBoundary--7xM4wFHHGxMnJP0h6hCOohZVjyDlD8efhFawFx0NoQ------
