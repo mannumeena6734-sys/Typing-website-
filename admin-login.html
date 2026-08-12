@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Login</title>
 
+  <title>Admin Login - Typing Website</title>
+
+  <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
@@ -26,7 +28,7 @@
     .login-box {
       width: 100%;
       max-width: 420px;
-      background: white;
+      background: #ffffff;
       padding: 30px;
       border-radius: 18px;
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
@@ -34,8 +36,14 @@
 
     h1 {
       text-align: center;
-      margin: 0 0 25px;
-      font-size: 34px;
+      margin: 0 0 8px;
+      font-size: 30px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 25px;
     }
 
     input {
@@ -55,10 +63,10 @@
     button {
       width: 100%;
       padding: 14px;
-      border: 0;
+      border: none;
       border-radius: 8px;
       background: #111;
-      color: white;
+      color: #fff;
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
@@ -74,6 +82,7 @@
       text-align: center;
       font-weight: bold;
       min-height: 22px;
+      line-height: 1.5;
     }
   </style>
 </head>
@@ -83,6 +92,10 @@
   <div class="login-box">
 
     <h1>🔐 Admin Login</h1>
+
+    <div class="subtitle">
+      Typing Website Admin Panel
+    </div>
 
     <form id="loginForm">
 
@@ -102,31 +115,51 @@
         required
       >
 
-      <button type="submit" id="loginButton">
+      <button
+        type="submit"
+        id="loginButton"
+      >
         LOGIN
       </button>
 
-      <div id="loginMessage"></div>
-
     </form>
+
+    <div id="loginMessage"></div>
 
   </div>
 
+
   <script>
-    // ==============================
-    // SUPABASE CONFIGURATION
-    // ==============================
+
+    /* =========================================
+       SUPABASE PROJECT
+    ========================================= */
 
     const SUPABASE_URL =
       "https://ztoebrsyyknoegbisgyj.supabase.co";
+
+
+    /*
+      IMPORTANT:
+      Ye wahi Publishable Key hai jo aapne
+      pehle mujhe bheji thi.
+    */
 
     const SUPABASE_PUBLISHABLE_KEY =
       "sb_publishable_tZ6BzwBYeZcuohucrOvgQA_oSpp6P6h";
 
 
-    // ==============================
-    // CREATE SUPABASE CLIENT
-    // ==============================
+    /* =========================================
+       ADMIN EMAIL
+    ========================================= */
+
+    const ADMIN_EMAIL =
+      "typingwork246@gmail.com";
+
+
+    /* =========================================
+       SUPABASE CLIENT
+    ========================================= */
 
     const supabaseClient =
       window.supabase.createClient(
@@ -135,9 +168,9 @@
       );
 
 
-    // ==============================
-    // GET HTML ELEMENTS
-    // ==============================
+    /* =========================================
+       HTML ELEMENTS
+    ========================================= */
 
     const loginForm =
       document.getElementById("loginForm");
@@ -149,65 +182,132 @@
       document.getElementById("loginMessage");
 
 
-    // ==============================
-    // LOGIN
-    // ==============================
+    /* =========================================
+       LOGIN
+    ========================================= */
 
     loginForm.addEventListener(
       "submit",
-      async function (event) {
+      async function(event) {
 
         event.preventDefault();
 
+
         const email =
-          document.getElementById("email")
-          .value
-          .trim();
+          document
+            .getElementById("email")
+            .value
+            .trim();
 
         const password =
-          document.getElementById("password")
-          .value;
+          document
+            .getElementById("password")
+            .value;
 
 
-        // Disable button
         loginButton.disabled = true;
-        loginButton.textContent = "LOGIN...";
 
-        loginMessage.style.color = "black";
-        loginMessage.textContent = "Checking login...";
+        loginButton.textContent =
+          "LOGIN...";
+
+        loginMessage.style.color =
+          "#111";
+
+        loginMessage.textContent =
+          "Checking login...";
 
 
         try {
 
+          /* -------------------------------
+             SUPABASE LOGIN
+          ------------------------------- */
+
           const { data, error } =
-            await supabaseClient.auth.signInWithPassword({
-              email: email,
-              password: password
-            });
+            await supabaseClient.auth
+              .signInWithPassword({
+
+                email: email,
+
+                password: password
+
+              });
 
 
-          // Supabase returned an error
+          /* -------------------------------
+             ERROR
+          ------------------------------- */
+
           if (error) {
+
+            console.error(
+              "Supabase error:",
+              error
+            );
+
             throw error;
           }
 
 
-          // User was not returned
-          if (!data || !data.user) {
-            throw new Error("Login failed.");
+          /* -------------------------------
+             USER CHECK
+          ------------------------------- */
+
+          if (
+            !data ||
+            !data.user ||
+            !data.user.email
+          ) {
+
+            throw new Error(
+              "User account was not returned."
+            );
           }
 
 
-          // Login successful
-          loginMessage.style.color = "green";
+          /* -------------------------------
+             ADMIN EMAIL CHECK
+          ------------------------------- */
+
+          if (
+            data.user.email.toLowerCase() !==
+            ADMIN_EMAIL.toLowerCase()
+          ) {
+
+            await supabaseClient.auth.signOut();
+
+            throw new Error(
+              "Admin access denied."
+            );
+          }
+
+
+          /* -------------------------------
+             SUCCESS
+          ------------------------------- */
+
+          loginMessage.style.color =
+            "green";
+
           loginMessage.textContent =
             "✅ Login successful!";
 
 
-          // Open admin panel
-          setTimeout(function () {
+          loginButton.textContent =
+            "OPENING ADMIN PANEL...";
 
-            window.location.href = "admin.html";
+
+          /*
+            GitHub Pages project:
+            /Typing-website-/
+
+            admin.html isi folder me hai.
+          */
+
+          setTimeout(function() {
+
+            window.location.href =
+              "./admin.html";
 
           }, 700);
 
@@ -215,12 +315,14 @@
         } catch (error) {
 
           console.error(
-            "Supabase Login Error:",
+            "Login error:",
             error
           );
 
 
-          loginMessage.style.color = "red";
+          loginMessage.style.color =
+            "red";
+
 
           loginMessage.textContent =
             "❌ " +
@@ -230,8 +332,11 @@
             );
 
 
-          loginButton.disabled = false;
-          loginButton.textContent = "LOGIN";
+          loginButton.disabled =
+            false;
+
+          loginButton.textContent =
+            "LOGIN";
         }
 
       }
